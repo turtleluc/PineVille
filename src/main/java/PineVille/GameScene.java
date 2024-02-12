@@ -20,6 +20,11 @@ public class GameScene {
         int wood = 0;
         int gold = 0;
 
+        int circleX = screenWidth / 2;
+        int circleY = screenHeight / 2;
+        float moveSpeed = 5.0f;
+        Color playercol;
+
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
 
 
@@ -41,14 +46,30 @@ public class GameScene {
                     gold++;
                 }
 
-                if (IsKeyDown(KEY_W))
-                {
-                    DrawText("U R 2 Dumb To Code Movement U Silly", screenWidth/4, screenHeight/3, 60, RED);
-                }
-                if (IsKeyDown(KEY_S))
-                {
-                    DrawText("Noh", screenWidth/2 - 10, 712, 60, RED);
-                }
+            float moveX = 0;
+            float moveY = 0;
+
+            if (IsKeyDown(KEY_D)) {
+                moveX += moveSpeed;
+            }
+            if (IsKeyDown(KEY_A)) {
+                moveX -= moveSpeed;
+            }
+            if (IsKeyDown(KEY_S)) {
+                moveY += moveSpeed;
+            }
+            if (IsKeyDown(KEY_W)) {
+                moveY -= moveSpeed;
+            }
+
+            // Normalize diagonal movement
+            if (moveX != 0 && moveY != 0) {
+                moveX /= Math.sqrt(2);
+                moveY /= Math.sqrt(2);
+            }
+
+            circleX += (int) moveX;
+            circleY += (int) moveY;
 
             //----------------------------------------------------------------------------------
 
@@ -61,7 +82,7 @@ public class GameScene {
             DrawText("Wood: " + wood, 20, 20, 30, DARKBROWN);
             DrawText("Gold: " + gold, 20, 50, 30, GOLD);
 
-            DrawCircle(screenWidth/2, screenHeight/2, 35, GREEN);
+            DrawCircle(circleX, circleY, 35, PLAYERCOL);
 
             EndDrawing();
             //----------------------------------------------------------------------------------
