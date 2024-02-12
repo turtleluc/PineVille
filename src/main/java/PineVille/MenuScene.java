@@ -1,9 +1,12 @@
+
 package PineVille;
+
+import com.raylib.Jaylib;
 
 import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.*;
 
-public class GameScene {
+public class MenuScene {
 
 
 
@@ -17,14 +20,10 @@ public class GameScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
-        int wood = 0;
-        int gold = 0;
+        boolean play = false;
+        boolean quit = false;
 
-        int circleX = screenWidth / 2;
-        int circleY = screenHeight / 2;
-        float moveSpeed = 7.0f;
-
-        InitWindow(screenWidth, screenHeight, "Pine-Ville");
+        InitWindow(screenWidth, screenHeight, "Pine-Ville Main Menu");
 
 
         SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
@@ -35,40 +34,10 @@ public class GameScene {
         {
             // Update
             //----------------------------------------------------------------------------------
-                if (IsKeyPressed(KEY_UP))
+                if(IsKeyPressed(KEY_DOWN))
                 {
-                    wood++;
+                    
                 }
-
-                if (IsKeyPressed(KEY_DOWN))
-                {
-                    gold++;
-                }
-
-            float moveX = 0;
-            float moveY = 0;
-
-            if (IsKeyDown(KEY_D)) {
-                moveX += moveSpeed;
-            }
-            if (IsKeyDown(KEY_A)) {
-                moveX -= moveSpeed;
-            }
-            if (IsKeyDown(KEY_S)) {
-                moveY += moveSpeed;
-            }
-            if (IsKeyDown(KEY_W)) {
-                moveY -= moveSpeed;
-            }
-
-            // Normalize diagonal movement
-            if (moveX != 0 && moveY != 0) {
-                moveX /= Math.sqrt(2);
-                moveY /= Math.sqrt(2);
-            }
-
-            circleX += (int) moveX;
-            circleY += (int) moveY;
 
             //----------------------------------------------------------------------------------
 
@@ -77,11 +46,13 @@ public class GameScene {
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
+            GuiSetStyle(DEFAULT, TEXT_SIZE, 60);
 
-            DrawText("Wood: " + wood, 20, 20, 30, DARKBROWN);
-            DrawText("Gold: " + gold, 20, 50, 30, GOLD);
+            DrawText("Pine-Ville", 725, 200, 100, GOLD);
 
-            DrawCircle(circleX, circleY, 35, GREEN);
+
+            play = GuiButton(new Jaylib.Rectangle(screenWidth/2 - 250, screenHeight/2, 500, 150 ), "Play");
+            quit = GuiButton(new Jaylib.Rectangle(screenWidth/2 - 250, screenHeight/2 + 300, 500, 150 ), "Quit");
 
             EndDrawing();
             //----------------------------------------------------------------------------------
