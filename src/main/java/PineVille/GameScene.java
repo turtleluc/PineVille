@@ -1,5 +1,8 @@
 package PineVille;
 
+import com.raylib.Jaylib;
+import com.raylib.Raylib;
+
 import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.*;
 
@@ -17,7 +20,9 @@ public class GameScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
-        Player player = new Player();
+        Raylib.Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
+        Player player = new Player(new Jaylib.Vector2(100, 100), new Jaylib.Vector2(50, 50), texPlayer);
+
 
         int circleX = screenWidth / 2;
         int circleY = screenHeight / 2;
@@ -81,10 +86,11 @@ public class GameScene {
 
             ClearBackground(RAYWHITE);
 
-            DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
-            DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
-
-            DrawCircle(circleX, circleY, 35, GREEN);
+//            DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
+//            DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
+//
+//            DrawCircle(circleX, circleY, 35, GREEN);
+            player.draw();
 
             EndDrawing();
             //----------------------------------------------------------------------------------
