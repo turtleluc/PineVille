@@ -20,8 +20,9 @@ public class GameScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
-        Raylib.Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
-        Player player = new Player(new Jaylib.Vector2(100, 100), new Jaylib.Vector2(50, 50), texPlayer);
+        Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
+        Player player = new Player(new Jaylib.Vector2(100,100), WHITE);
+//        player.setTexture(texPlayer);
 
 
         int circleX = screenWidth / 2;
@@ -33,7 +34,7 @@ public class GameScene {
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
 
 
-        ToggleFullscreen();
+        //ToggleFullscreen();
 
         SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
         //--------------------------------------------------------------------------------------
@@ -86,16 +87,17 @@ public class GameScene {
 
             ClearBackground(RAYWHITE);
 
-//            DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
-//            DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
-//
-//            DrawCircle(circleX, circleY, 35, GREEN);
-            player.draw();
+            DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
+            DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
+
+            DrawCircle(circleX, circleY, 35, GREEN);
+            player.draw(texPlayer);
 
             EndDrawing();
             //----------------------------------------------------------------------------------
         }
 
+        UnloadTexture(texPlayer);
         // De-Initialization
         //--------------------------------------------------------------------------------------
         CloseWindow();        // Close window and OpenGL context
