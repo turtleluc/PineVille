@@ -17,15 +17,18 @@ public class GameScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
-        int wood = 0;
-        int gold = 0;
+        Player player = new Player();
 
         int circleX = screenWidth / 2;
         int circleY = screenHeight / 2;
         float moveSpeed = 7.0f;
 
+
+
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
 
+
+        ToggleFullscreen();
 
         SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
         //--------------------------------------------------------------------------------------
@@ -37,12 +40,12 @@ public class GameScene {
             //----------------------------------------------------------------------------------
                 if (IsKeyPressed(KEY_UP))
                 {
-                    wood++;
+                    player.wood++;
                 }
 
                 if (IsKeyPressed(KEY_DOWN))
                 {
-                    gold++;
+                    player.gold++;
                 }
 
             float moveX = 0;
@@ -78,8 +81,8 @@ public class GameScene {
 
             ClearBackground(RAYWHITE);
 
-            DrawText("Wood: " + wood, 20, 20, 30, DARKBROWN);
-            DrawText("Gold: " + gold, 20, 50, 30, GOLD);
+            DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
+            DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
 
             DrawCircle(circleX, circleY, 35, GREEN);
 

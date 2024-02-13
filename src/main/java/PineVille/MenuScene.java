@@ -20,6 +20,8 @@ public class MenuScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
+        ToggleFullscreen();
+
         boolean play = false;
         boolean quit = false;
 
