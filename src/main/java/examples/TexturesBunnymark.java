@@ -101,6 +101,7 @@ public class TexturesBunnymark {
             }
 
             DrawRectangle(0, 0, screenWidth, 40, BLACK);
+
             DrawText(TextFormat("bunnies: "+bunniesCount), 120, 10, 20, GREEN);
             DrawText(TextFormat("batched draw calls: "+ 1 + bunniesCount/MAX_BATCH_ELEMENTS), 320, 10, 20, MAROON);
 

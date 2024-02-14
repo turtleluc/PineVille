@@ -20,39 +20,35 @@ public class GameScene {
         int screenWidth = 1920;
         int screenHeight = 1080;
 
-        Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
         Player player = new Player(new Jaylib.Vector2(100,100), WHITE);
-//        player.setTexture(texPlayer);
-
 
         int circleX = screenWidth / 2;
         int circleY = screenHeight / 2;
+
+        float playerX = screenWidth / 2;
+        float playerY = screenHeight / 2;
         float moveSpeed = 7.0f;
 
-
-
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
+        Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
+        Texture texTree = LoadTexture("resources/SpriteTree.png");
 
-
-        //ToggleFullscreen();
+        ToggleFullscreen();
 
         SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
         //--------------------------------------------------------------------------------------
 
         // Main game loop
-        while (!WindowShouldClose())    // Detect window close button or ESC key
-        {
-            // Update
-            //----------------------------------------------------------------------------------
-                if (IsKeyPressed(KEY_UP))
-                {
-                    player.wood++;
-                }
+        while (!WindowShouldClose()) {
 
-                if (IsKeyPressed(KEY_DOWN))
-                {
-                    player.gold++;
-                }
+            // Update
+            if (IsKeyPressed(KEY_UP)) {
+                player.wood++;
+            }
+
+            if (IsKeyPressed(KEY_DOWN)) {
+                player.gold++;
+            }
 
             float moveX = 0;
             float moveY = 0;
@@ -70,34 +66,38 @@ public class GameScene {
                 moveY -= moveSpeed;
             }
 
-            // Normalize diagonal movement
+            if (IsKeyPressed(   KEY_TAB)) {
+                ToggleFullscreen();
+            }
+
             if (moveX != 0 && moveY != 0) {
                 moveX /= Math.sqrt(2);
                 moveY /= Math.sqrt(2);
             }
 
-            circleX += (int) moveX;
-            circleY += (int) moveY;
-
-            //----------------------------------------------------------------------------------
+            playerX += moveX;
+            playerY += moveY;
 
             // Draw
-            //----------------------------------------------------------------------------------
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
+            DrawTexturePro(texTree, new Jaylib().Rectangle(0, 0, texTree.width(), texTree.height()),
+                    new Jaylib().Rectangle(100, 100, texTree.width() * 4, texTree.height() * 4),
+                    new Jaylib.Vector2(0, 0), 0, WHITE);
+//            DrawTexture(texPlayer, (int) playerX, (int) playerY, WHITE);
 
+            DrawTexturePro(texPlayer, new Jaylib().Rectangle(0, 0, texPlayer.width(), texPlayer.height()),
+                    new Jaylib().Rectangle(playerX, playerY, texPlayer.width() * 2, texPlayer.height() * 2),
+                    new Jaylib.Vector2(0, 0), 0, WHITE);
             DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
             DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
 
-            DrawCircle(circleX, circleY, 35, GREEN);
-            player.draw(texPlayer);
 
             EndDrawing();
-            //----------------------------------------------------------------------------------
         }
 
-        UnloadTexture(texPlayer);
+//        UnloadTexture(texPlayer);
         // De-Initialization
         //--------------------------------------------------------------------------------------
         CloseWindow();        // Close window and OpenGL context
