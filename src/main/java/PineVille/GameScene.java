@@ -8,8 +8,6 @@ import static com.raylib.Raylib.*;
 
 public class GameScene {
 
-
-
     //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -29,9 +27,18 @@ public class GameScene {
         float playerY = screenHeight / 2;
         float moveSpeed = 7.0f;
 
+
+
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
         Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
         Texture texTree = LoadTexture("resources/SpriteTree.png");
+        Texture texShop = LoadTexture("resources/SpriteShop.png");
+
+        SetExitKey(KEY_NULL);
+
+        boolean exitWindowRequested = false;
+        boolean exitWindow = false;
+
 
         ToggleFullscreen();
 
@@ -78,12 +85,28 @@ public class GameScene {
             playerX += moveX;
             playerY += moveY;
 
+            if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
+
+            if (exitWindowRequested)
+            {
+
+                if (IsKeyPressed(KEY_Y)) exitWindow = true;
+                else if (IsKeyPressed(KEY_N)) exitWindowRequested = false;
+            }
+
+            if (exitWindow) CloseWindow();
+
+
             // Draw
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
             DrawTexturePro(texTree, new Jaylib().Rectangle(0, 0, texTree.width(), texTree.height()),
                     new Jaylib().Rectangle(100, 100, texTree.width() * 4, texTree.height() * 4),
+                    new Jaylib.Vector2(0, 0), 0, WHITE);
+
+            DrawTexturePro(texShop, new Jaylib().Rectangle(0, 0, texShop.width(), texShop.height()),
+                    new Jaylib().Rectangle(1200, 200, texShop.width() * 6, texShop.height() * 6),
                     new Jaylib.Vector2(0, 0), 0, WHITE);
 //            DrawTexture(texPlayer, (int) playerX, (int) playerY, WHITE);
 
@@ -92,6 +115,12 @@ public class GameScene {
                     new Jaylib.Vector2(0, 0), 0, WHITE);
             DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
             DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
+
+            if (exitWindowRequested)
+            {
+                DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+                DrawText("Are you sure you want to exit Pine-Ville? [Y/N]", 350, 500, 50, WHITE);
+            }
 
 
             EndDrawing();

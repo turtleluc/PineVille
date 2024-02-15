@@ -9,6 +9,7 @@ public class MenuScene {
 
     // Method to switch to the GameScene
     public static void switchToGameScene() {
+        ToggleFullscreen();
         CloseWindow(); // Close the menu window
         GameScene.main(new String[]{}); // Run the GameScene
     }
@@ -25,7 +26,7 @@ public class MenuScene {
 
         Texture texLogo = LoadTexture("resources/SpriteLogo.png");
 
-        //ToggleFullscreen();
+        ToggleFullscreen();
 
         SetTargetFPS(60);
 
@@ -40,7 +41,7 @@ public class MenuScene {
 
             // Draw
             BeginDrawing();
-            ClearBackground(RAYWHITE);
+            ClearBackground(WHITE);
             GuiSetStyle(DEFAULT, TEXT_SIZE, 60);
             DrawTexturePro(texLogo, new Jaylib().Rectangle(0, 0, texLogo.width(), texLogo.height()),
                     new Jaylib().Rectangle(logoX, logoY, texLogo.width() * 13, texLogo.height() * 13),
