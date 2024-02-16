@@ -20,9 +20,6 @@ public class GameScene {
 
         Player player = new Player(new Jaylib.Vector2(100,100), WHITE);
 
-        int circleX = screenWidth / 2;
-        int circleY = screenHeight / 2;
-
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
         Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
         Texture texTree = LoadTexture("resources/SpriteTree.png");
