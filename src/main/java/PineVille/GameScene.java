@@ -19,6 +19,7 @@ public class GameScene {
         int screenHeight = 1080;
 
         Player player = new Player(new Jaylib.Vector2(100,100), WHITE);
+        Shop shop = new Shop(new Jaylib.Vector2(100,100), WHITE, player);
 
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
         Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
@@ -46,9 +47,10 @@ public class GameScene {
                 player.wood++;
             }
 
-            if (IsKeyPressed(KEY_DOWN)) {
+            if (IsKeyDown(KEY_DOWN)) {
                 player.gold++;
             }
+
 
             if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
 
@@ -76,8 +78,14 @@ public class GameScene {
 
             player.drawPlayer(texPlayer);
 
+            if (IsKeyPressed(KEY_LEFT)) {
+                shop.isShopUI = !shop.isShopUI;
+            }
+            if (shop.isShopUI) shop.ShopUi();
+
             DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
             DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
+            DrawText("Axe Tier: " + player.axeTier, 20, 80, 30, GRAY);
 
             if (exitWindowRequested)
             {
@@ -85,6 +93,7 @@ public class GameScene {
                 DrawText("Are you sure you want to exit Pine-Ville? [Y/N]", 350, 500, 50, WHITE);
             }
 
+            
             EndDrawing();
         }
 

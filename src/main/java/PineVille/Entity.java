@@ -14,6 +14,10 @@ public class Entity {
     private Raylib.Color color;
 
     protected Raylib.Rectangle rectangle;
+    private Raylib.Texture texture;
+    public void changeTexture(Raylib.Texture newTexture) {
+        this.texture = newTexture;
+    }
     public void draw(Raylib.Texture texture) {
         DrawTexture(texture, (int) position.x(), (int) position.y(), color);
     }

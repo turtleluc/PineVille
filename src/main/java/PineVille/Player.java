@@ -19,6 +19,8 @@ public class Player extends Entity {
     int wood = 0;
     int gold = 0;
 
+    int axeTier = 1;
+
     float playerX = screenWidth / 2;
     float playerY = screenHeight / 2;
     float moveSpeed;
