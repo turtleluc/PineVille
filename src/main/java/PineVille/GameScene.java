@@ -21,6 +21,9 @@ public class GameScene {
         Player player = new Player(new Jaylib.Vector2(100,100), WHITE);
         Shop shop = new Shop(new Jaylib.Vector2(100,100), WHITE, player);
 
+        Sell sell = new Sell(player);
+        Debug debug = new Debug(player, sell);
+
         InitWindow(screenWidth, screenHeight, "Pine-Ville");
         Texture texPlayer = LoadTexture("resources/wabbit_alpha.png");
         Texture texTree = LoadTexture("resources/SpriteTree.png");
@@ -43,26 +46,17 @@ public class GameScene {
 
             player.Move(7.0f);
 
-            if (IsKeyPressed(KEY_UP)) {
-                player.wood++;
-            }
-
-            if (IsKeyDown(KEY_DOWN)) {
-                player.gold++;
-            }
-
+            Debug.Commands();
 
             if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
 
             if (exitWindowRequested)
             {
-
                 if (IsKeyPressed(KEY_Y)) exitWindow = true;
                 else if (IsKeyPressed(KEY_N)) exitWindowRequested = false;
             }
 
             if (exitWindow) CloseWindow();
-
 
             // Draw
             BeginDrawing();
@@ -78,11 +72,14 @@ public class GameScene {
 
             player.drawPlayer(texPlayer);
 
+            //Shop
             if (IsKeyPressed(KEY_LEFT)) {
                 shop.isShopUI = !shop.isShopUI;
             }
             if (shop.isShopUI) shop.ShopUi();
 
+
+            //Player ui
             DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
             DrawText("Gold: " + player.gold, 20, 50, 30, GOLD);
             DrawText("Axe Tier: " + player.axeTier, 20, 80, 30, GRAY);
@@ -93,7 +90,13 @@ public class GameScene {
                 DrawText("Are you sure you want to exit Pine-Ville? [Y/N]", 350, 500, 50, WHITE);
             }
 
-            
+            if(IsKeyPressed(KEY_GRAVE))
+            {
+                /*Debug.Load();*/
+                Debug.debug = !Debug.debug;
+            }
+
+            if (Debug.debug) Debug.Load();
             EndDrawing();
         }
 
