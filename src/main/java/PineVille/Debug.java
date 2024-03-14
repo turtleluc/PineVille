@@ -18,18 +18,25 @@ public class Debug {
     }
 
     public static void Load() {
-        DrawText("Debug ", 1500, 10, 30, RED);
-        DrawFPS(1500, 50);
-        DrawText("Player Position (" + player.playerX + " , " + player.playerY + ")", 1500, 90, 20, LIME);
-        DrawText("Player Speed (" + player.moveSpeed + ")", 1500, 130, 20, LIME);
+        DrawText("Debug ", 1550, 10, 30, RED);
+        DrawFPS(1550, 50);
+        DrawText("Player Position (" + player.playerX + " , " + player.playerY + ")", 1550, 90, 20, LIME);
+        DrawText("Player Speed (" + player.moveSpeed + ")", 1550, 130, 20, LIME);
 
-        if (IsWindowState(FLAG_FULLSCREEN_MODE)) DrawText("FullScreen: on", 1500, 170, 20, LIME);
-        else DrawText("FullScreen: off", 1500, 170, 20, MAROON);
+        if (IsWindowState(FLAG_FULLSCREEN_MODE)) DrawText("FullScreen: on", 1550, 170, 20, LIME);
+        else DrawText("FullScreen: off", 1550, 170, 20, MAROON);
+
+        DrawText("< to open shop ", 1550, 250, 20, DARKGRAY);
+        DrawText("^ to add wood ", 1550, 290, 20, DARKGRAY);
+        DrawText("v to add gold ", 1550, 330, 20, DARKGRAY);
+        DrawText("> to converte wood to gold", 1550, 370, 20, DARKGRAY);
+        DrawText("(" + sell.woodToGoldRate +" gold per wood)", 1550, 450, 20, ORANGE);
+        DrawText("([Null]-[Null] wood per tree)", 1550, 490, 20, ORANGE);
     }
 
     public static void Commands()
     {
-        if (IsKeyPressed(KEY_UP)) {
+        if (IsKeyDown(KEY_UP)) {
             player.wood++;
         }
 

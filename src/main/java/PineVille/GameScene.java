@@ -11,6 +11,7 @@ public class GameScene {
     //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
+    static Tree[] trees;
     public static void main(String[] s)
     {
         // Initialization
@@ -34,9 +35,11 @@ public class GameScene {
         boolean exitWindowRequested = false;
         boolean exitWindow = false;
 
+        initializeTrees();
+
         ToggleFullscreen();
 
-        SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+        SetTargetFPS(75);               // Set our game to run at 60 frames-per-second
         //--------------------------------------------------------------------------------------
 
         // Main game loop
@@ -62,13 +65,14 @@ public class GameScene {
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
-            DrawTexturePro(texTree, new Jaylib().Rectangle(0, 0, texTree.width(), texTree.height()),
-                    new Jaylib().Rectangle(100, 100, texTree.width() * 4, texTree.height() * 4),
-                    new Jaylib.Vector2(0, 0), 0, WHITE);
 
             DrawTexturePro(texShop, new Jaylib().Rectangle(0, 0, texShop.width(), texShop.height()),
                     new Jaylib().Rectangle(1100, 200, texShop.width() * 7, texShop.height() * 7),
                     new Jaylib.Vector2(0, 0), 0, WHITE);
+
+            for (Tree tree : trees) {
+                tree.draw();
+            }
 
             player.drawPlayer(texPlayer);
 
@@ -77,7 +81,6 @@ public class GameScene {
                 shop.isShopUI = !shop.isShopUI;
             }
             if (shop.isShopUI) shop.ShopUi();
-
 
             //Player ui
             DrawText("Wood: " + player.wood, 20, 20, 30, DARKBROWN);
@@ -107,5 +110,14 @@ public class GameScene {
         //--------------------------------------------------------------------------------------
 
         return;
+    }
+
+    private static void initializeTrees() {
+        trees = new Tree[15];
+        for (int i = 0; i < trees.length; i++) {
+            float x = GetRandomValue(0, 700 - 1);
+            float y = GetRandomValue(0, 1080 - 3);
+            trees[i] = new Tree(x, y);
+        }
     }
 }
