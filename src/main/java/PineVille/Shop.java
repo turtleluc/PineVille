@@ -25,7 +25,7 @@ public class Shop extends Entity {
 
     }
 
-    void ShopUi() {
+    public void ShopUi() {
         DrawRectangle(0, 0, screenWidth, screenHeight, BROWN);
 
         // Calculate starting x position for the row of buttons
@@ -68,6 +68,11 @@ public class Shop extends Entity {
             }
         }
         DrawText("Tier 5 (1500 gold)", startX + 600, screenHeight/2 - 50, 20, WHITE);
+
+        if (GuiButton(new Jaylib.Rectangle(1800, 20, 50, 50), "X")) {
+            isShopUI = !isShopUI;
+        }
     }
+
 
 }

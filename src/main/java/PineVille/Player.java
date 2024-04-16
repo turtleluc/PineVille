@@ -20,6 +20,7 @@ public class Player extends Entity {
     int gold = 0;
 
     int axeTier = 1;
+    int currentDamage;
 
     float playerX = screenWidth / 2;
     float playerY = screenHeight / 2;
@@ -70,7 +71,31 @@ public class Player extends Entity {
             new Jaylib.Vector2(0, 0), 0, Jaylib.WHITE);
     }
 
-
+    public void tierUpdate() {
+        switch (this.axeTier) {
+            case 1:
+                currentDamage = 5;
+                // code block
+                break;
+            case 2:
+                currentDamage = 10;
+                // code block
+                break;
+            case 3:
+                currentDamage = 20;
+                // code block
+                break;
+            case 4:
+                currentDamage = 30;
+                // code block
+                break;
+            case 5:
+                currentDamage = 50;
+                // code block
+                break;
+            default: currentDamage = 5;
+        }
+    }
 
     // Getter methods if needed
 }

@@ -5,10 +5,10 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.*;
-class Tree {
+class Tree extends Entity{
     float treeX ;
     float treeY;
-    private int health;
+    int health;
     private Texture texTree;
     private Texture texLog;
 
@@ -19,6 +19,7 @@ class Tree {
         this.texTree = LoadTexture("resources/SpriteTree.png");
         this.texLog = LoadTexture("resources/SpriteTreeStump.png");
     }
+
 
     public void draw() {
         if (health > 0) {

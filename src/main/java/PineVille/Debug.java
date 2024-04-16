@@ -8,6 +8,7 @@ import static com.raylib.Raylib.*;
 
 public class Debug {
 
+    // singleton
     static Boolean debug = false;
     static Player player;
     static Sell sell;
